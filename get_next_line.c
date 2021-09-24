@@ -6,7 +6,7 @@
 /*   By: julrodri <julrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 11:50:34 by julrodri          #+#    #+#             */
-/*   Updated: 2021/09/24 14:46:22 by julrodri         ###   ########.fr       */
+/*   Updated: 2021/09/24 14:59:09 by julrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_lsttochar(char **s, t_list *header, int *i)
 		j = 0;
 		while(((char*)temp->content)[j] != '\0')
 		{
-			*s[*i] = ((char*)temp->content)[j];
+			(*s)[*i] = ((char*)temp->content)[j];
 			(*i)++;
 			j++;
 		}
@@ -45,8 +45,8 @@ void	ft_lsttochar(char **s, t_list *header, int *i)
 	j = 0;
 	while(((char*)temp->content)[j] != '\0')
 	{
-		*s[*i] = ((char*)temp->content)[j];
-		*i++;
+		(*s)[*i] = ((char*)temp->content)[j];
+		(*i)++;
 		j++;
 	}	
 }
@@ -102,7 +102,8 @@ char	*get_next_line(int fd)
 				break;
 		}
 		line = ft_strjoin(mem, header, buffer); 
-		mem = ft_strchr(buffer, '\n') + 1;
+		free(mem);
+		mem = strdup(ft_strchr(buffer, '\n') + 1);
 		free(buffer);
 		ft_lstclear(&header, free);
 	}
@@ -112,7 +113,8 @@ char	*get_next_line(int fd)
 		line = malloc(i);
 		while (i > 0)
 			line[i] = mem[i--];
-		mem = ft_strchr(mem, '\n') + 1;
+		free(mem);
+		mem = strdup(ft_strchr(mem, '\n') + 1);
 	}
 	return(line);
 }
