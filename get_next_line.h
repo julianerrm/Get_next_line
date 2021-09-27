@@ -6,7 +6,7 @@
 /*   By: julrodri <julrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 11:52:31 by julrodri          #+#    #+#             */
-/*   Updated: 2021/09/22 18:19:55 by julrodri         ###   ########.fr       */
+/*   Updated: 2021/09/26 18:14:57 by julrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,6 @@ int	    ft_lstsize(t_list *lst);
 void	ft_lstadd_back(t_list **lst, t_list *new);
 t_list	*ft_lstnew(void *content);
 void	ft_lstclear(t_list **lst, void (*del)(void*));
+char	*ft_strdup(const char *s);
 
 #endif
