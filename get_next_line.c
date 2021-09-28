@@ -6,7 +6,7 @@
 /*   By: julrodri <julrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 11:50:34 by julrodri          #+#    #+#             */
-/*   Updated: 2021/09/26 18:18:53 by julrodri         ###   ########.fr       */
+/*   Updated: 2021/09/28 09:15:59 by julrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,11 @@ char	*ft_strjoin(char *mem, t_list *header, char *buffer)
 	int		i;
 	int		j;
 
+	j = 0;
 	r = malloc(ft_strlen(mem) + ft_strlen(buffer) + BUFFER_SIZE * ft_lstsize(header) + 2);
 	if (!r)
 		return(0);
 	i = 0;
-	j = 0;
 	while (mem != 0 && mem[i] != '\0')
 		r[i] = mem[i++];
 	ft_lsttochar(&r, header, &i);
@@ -86,14 +86,13 @@ char	*get_next_line(int fd)
 	header = 0;
 	if(!(ft_strchr(mem, '\n')))
 	{
-		buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
+		buffer = calloc((BUFFER_SIZE + 1), sizeof(char));
 		if (!buffer) 
 			return(0); 
 		while(read(fd, buffer, BUFFER_SIZE) != 0)
 		{
-			//read(fd, buffer, BUFFER_SIZE); // o buffer já recebe ali no while? se sim devo tirar essa linha
 			buffer[BUFFER_SIZE] = '\0';
-			if(!(ft_strchr(buffer, '\n')))
+			if(!(ft_strchr(buffer, '\n')) && ft_strlen(buffer) == BUFFER_SIZE)
 			{
 				ft_lstadd_back(&header, ft_lstnew(buffer));
 				buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
@@ -105,7 +104,8 @@ char	*get_next_line(int fd)
 		}
 		line = ft_strjoin(mem, header, buffer); 
 		free(mem);
-		mem = ft_strdup(ft_strchr(buffer, '\n') + 1);
+		if ((ft_strchr(buffer, '\n')) != 0)
+			mem = ft_strdup(ft_strchr(buffer, '\n') + 1);
 		free(buffer);
 		ft_lstclear(&header, free);
 	}
@@ -116,7 +116,8 @@ char	*get_next_line(int fd)
 		while (i > 0)
 			line[i] = mem[i--];
 		free(mem);
-		mem = ft_strdup(ft_strchr(mem, '\n') + 1);
+		if ((ft_strchr(buffer, '\n')) != 0)
+			mem = ft_strdup(ft_strchr(buffer, '\n') + 1);
 	}
 	return(line);
 }

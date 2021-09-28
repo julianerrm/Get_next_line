@@ -6,7 +6,7 @@
 /*   By: julrodri <julrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 11:52:18 by julrodri          #+#    #+#             */
-/*   Updated: 2021/09/26 18:14:41 by julrodri         ###   ########.fr       */
+/*   Updated: 2021/09/28 08:34:46 by julrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ size_t	ft_strlen(const char *s)
 	if (!s)
 		return(0);
 	count = 0;
-	while (s[count] != '\0')
+	while (s[count] != '\0' && s[count] != '\n')
 		count++;
 	return (count);
 }
