@@ -6,7 +6,7 @@
 /*   By: julrodri <julrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 11:50:34 by julrodri          #+#    #+#             */
-/*   Updated: 2021/09/28 09:15:59 by julrodri         ###   ########.fr       */
+/*   Updated: 2021/09/28 14:21:13 by julrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,24 +55,25 @@ void	ft_lsttochar(char **s, t_list *header, int *i)
 
 char	*ft_strjoin(char *mem, t_list *header, char *buffer)
 {
-	char	*r;
+	char	*line;
 	int		size;
 	int		i;
 	int		j;
 
 	j = 0;
-	r = malloc(ft_strlen(mem) + ft_strlen(buffer) + BUFFER_SIZE * ft_lstsize(header) + 2);
-	if (!r)
+	line = malloc(ft_strlen(mem) + ft_strlen(buffer) + BUFFER_SIZE * ft_lstsize(header) + 2);
+	if (!line)
 		return(0);
 	i = 0;
 	while (mem != 0 && mem[i] != '\0')
-		r[i] = mem[i++];
-	ft_lsttochar(&r, header, &i);
+		line[i] = mem[i++];
+	ft_lsttochar(&line, header, &i);
 	while (buffer[j] != '\n' && buffer[j] != '\0')
-		r[i + j] = buffer[j++];
-	r[i + j] = '\n';
-	r[i + j + 1] = '\0';
-	return (r);
+		line[i + j] = buffer[j++];
+	if (buffer[j] == '\n')
+		line[i + j++] = '\n';
+	line[i + j] = '\0';
+	return (line);
 }
 
 char	*get_next_line(int fd)

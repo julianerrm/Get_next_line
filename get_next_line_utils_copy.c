@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_copy.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: julrodri <julrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 11:52:18 by julrodri          #+#    #+#             */
-/*   Updated: 2021/09/30 08:38:29 by julrodri         ###   ########.fr       */
+/*   Updated: 2021/09/30 14:11:10 by julrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,89 +33,29 @@ size_t	ft_strlen(const char *s)
 	if (!s)
 		return(0);
 	count = 0;
-	while (s[count] != '\0' && s[count] != '\n')
+	while (s[count] != '\0')
 		count++;
 	return (count);
 }
 
-int	ft_lstsize(t_list *lst)
-{
-	int	i;
 
-	if (!lst)
-		return (0);
-	i = 1;
-	while (lst->next)
-	{
-		lst = lst->next;
-		i++;
-	}
-	return (i);
-}
-
-void	ft_lstadd_back(t_list **lst, t_list *new)
-{
-	t_list	*temp;
-
-	if (!new || !lst)
-		return ;
-	if (!(*lst))
-	{
-		*lst = new;
-		return ;
-	}
-	temp = *lst;
-	while (temp->next)
-		temp = temp->next;
-	temp->next = new;
-}
-
-t_list	*ft_lstnew(void *content)
-{
-	t_list	*r;
-
-	r = malloc(sizeof(t_list));
-	if (!r)
-		return (0);
-	r->content = content;
-	r->next = NULL;
-	return (r);
-}
-
-void	ft_lstclear(t_list **lst, void (*del)(void*))
-{
-	t_list	*temp;
-	t_list	*next;
-
-	if (!*lst)
-		return ;
-	temp = *lst;
-	while (temp->next)
-	{
-		del(temp->content);
-		next = temp->next;
-		free(temp);
-		temp = next;
-	}
-	del(temp->content);
-	free(temp);
-	*lst = 0;
-}
-
-char	*ft_strdup(const char *s)
+char	*ft_strdup(const char *s, size_t size)
 {
 	char	*r;
 	size_t	i;
 
-	r = malloc((ft_strlen(s) + 1) * sizeof(char));
+	if (size == 0 || !s)
+		return (0);
+	r = malloc((size + 1) * sizeof(char));
 	if (!r)
 		return (0);
 	i = 0;
-	while (i <= ft_strlen(s))
+	while (i < size)
 	{
 		r[i] = s[i];
 		i++;
 	}
+	r[size] = '\0';
 	return (r);
 }
 
@@ -126,8 +66,12 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	int		j;
 
 	i = 0;
-	if (!s1 || !s2)
-		return (0);
+	if (!s2)
+		return (ft_strdup(s1, ft_strlen(s1)));
+	if (!s1 && !(ft_strchr(s2, '\n')))
+		return (ft_strdup(s2, ft_strlen(s2)));
+	if (!s1)
+		return (ft_strdup(s2, (size_t)(ft_strchr(s2, '\n') - s2 + 1)));
 	r = (char *) malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
 	if (!r)
 		return (0);
@@ -138,11 +82,18 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	}
 	j = i;
 	i = 0;
-	while (s2[i] != '\0')
+	while (s2[i] != '\0' || s2[i - 1] != '\n')
 	{
 		r[j + i] = s2[i];
 		i++;
 	}
 	r[j + i] = '\0';
 	return (r);
+}
+
+int main(void)
+{
+	char *j;
+
+	j = ft_strjoin("ola, ", "tudo ");
 }

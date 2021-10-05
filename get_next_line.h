@@ -6,7 +6,7 @@
 /*   By: julrodri <julrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 11:52:31 by julrodri          #+#    #+#             */
-/*   Updated: 2021/09/28 09:11:53 by julrodri         ###   ########.fr       */
+/*   Updated: 2021/09/30 14:04:16 by julrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,10 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 char	*get_next_line(int fd);
-void    ft_lsttochar(char **s, t_list *header, int *i);
-char	*ft_strjoin(char *mem, t_list *header, char *buffer);
+void	ft_add_to_line(char **line, char **mem, char *buffer);
 char	*ft_strchr(const char *s, int c);
 size_t	ft_strlen(const char *s);
-int	    ft_lstsize(t_list *lst);
-void	ft_lstadd_back(t_list **lst, t_list *new);
-t_list	*ft_lstnew(void *content);
-void	ft_lstclear(t_list **lst, void (*del)(void*));
-char	*ft_strdup(const char *s);
+char	*ft_strdup(const char *s, size_t size);
+char	*ft_strjoin(char const *s1, char const *s2);
 
 #endif
