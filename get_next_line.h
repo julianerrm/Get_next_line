@@ -6,7 +6,7 @@
 /*   By: julrodri <julrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 11:52:31 by julrodri          #+#    #+#             */
-/*   Updated: 2021/09/30 14:04:16 by julrodri         ###   ########.fr       */
+/*   Updated: 2021/10/04 09:38:05 by julrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,8 @@
 # define BUFFER_SIZE 5
 
 # include <stddef.h>
-# include <unistd.h>
 # include <stdlib.h>
-# include <stdio.h>
+# include <unistd.h>
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
