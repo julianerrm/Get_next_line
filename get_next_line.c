@@ -6,11 +6,30 @@
 /*   By: julrodri <julrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 11:50:34 by julrodri          #+#    #+#             */
-/*   Updated: 2021/10/04 15:49:35 by julrodri         ###   ########.fr       */
+/*   Updated: 2021/10/07 00:17:43 by julrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+#include <stdio.h>
+
+int	main(void)
+{
+	int		fd;
+	char	*o;
+
+	fd = open("ola.txt", O_RDONLY);
+	o = get_next_line(fd);
+	printf("%s", o);
+	free(o);
+	o = get_next_line(fd);
+	printf("%s", o);
+	free(o);
+	o = get_next_line(fd);
+	write(1,o,5);
+	free(o);
+}
 
 char	*ft_add_mem(char **mem)
 {
@@ -20,8 +39,7 @@ char	*ft_add_mem(char **mem)
 	if (!(ft_strchr(*mem, '\n')))
 	{
 		line = ft_strdup(*mem, ft_strlen(*mem));
-		if (*mem != 0)
-			free (*mem);
+		free (*mem);
 		return (line);
 	}
 	line = ft_strdup(*mem, (size_t)(ft_strchr(*mem, '\n') - *mem + 1));
@@ -45,11 +63,9 @@ void	ft_add_to_line(char **line, char **mem, char *buffer)
 		return ;
 	}
 	aux = ft_strdup(*line, ft_strlen(*line));
-	if (*line != 0)
-		free (*line);
+	free (*line);
 	*line = ft_strjoin(aux, buffer);
-	if (aux != 0)
-		free (aux);
+	free (aux);
 	if (ft_strchr(buffer, '\n') != 0)
 		*mem = ft_strdup(ft_strchr(buffer, '\n') + 1,
 				ft_strlen(ft_strchr(buffer, '\n') + 1));
@@ -63,12 +79,14 @@ char	*get_next_line(int fd)
 	int			read_size;
 
 	line = 0;
-	if ((ft_strchr(mem, '\n')) != 0 || read_size == 0)
+	if ((ft_strchr(mem, '\n')) != 0)
 		return (ft_add_mem(&mem));
 	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buffer)
 		return (0);
 	read_size = read(fd, buffer, BUFFER_SIZE);
+	if (read_size == 0 && mem != 0)
+		line = ft_add_mem(&mem);
 	while (read_size != 0)
 	{
 		buffer[read_size] = '\0';
@@ -78,8 +96,6 @@ char	*get_next_line(int fd)
 		else
 			break ;
 	}
-	if (read_size == 0 && mem != 0)
-		free(mem);
 	free(buffer);
 	return (line);
 }
