@@ -6,7 +6,7 @@
 /*   By: julrodri <julrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 11:50:34 by julrodri          #+#    #+#             */
-/*   Updated: 2021/10/07 00:17:43 by julrodri         ###   ########.fr       */
+/*   Updated: 2021/10/07 07:53:41 by julrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	main(void)
 	printf("%s", o);
 	free(o);
 	o = get_next_line(fd);
-	write(1,o,5);
+	write(1, o, 5);
 	free(o);
 }
 
