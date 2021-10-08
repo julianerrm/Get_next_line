@@ -6,30 +6,30 @@
 /*   By: julrodri <julrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 11:50:34 by julrodri          #+#    #+#             */
-/*   Updated: 2021/10/07 07:53:41 by julrodri         ###   ########.fr       */
+/*   Updated: 2021/10/08 11:33:43 by julrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-#include <stdio.h>
+// #include <stdio.h>
 
-int	main(void)
-{
-	int		fd;
-	char	*o;
+// int	main(void)
+// {
+// 	int		fd;
+// 	char	*o;
 
-	fd = open("ola.txt", O_RDONLY);
-	o = get_next_line(fd);
-	printf("%s", o);
-	free(o);
-	o = get_next_line(fd);
-	printf("%s", o);
-	free(o);
-	o = get_next_line(fd);
-	write(1, o, 5);
-	free(o);
-}
+// 	fd = open("ola.txt", O_RDONLY);
+// 	o = get_next_line(fd);
+// 	printf("%s", o);
+// 	free(o);
+// 	o = get_next_line(fd);
+// 	printf("%s", o);
+// 	free(o);
+// 	o = get_next_line(fd);
+// 	write(1, o, 5);
+// 	free(o);
+// }
 
 char	*ft_add_mem(char **mem)
 {
@@ -40,6 +40,7 @@ char	*ft_add_mem(char **mem)
 	{
 		line = ft_strdup(*mem, ft_strlen(*mem));
 		free (*mem);
+		*mem = 0;
 		return (line);
 	}
 	line = ft_strdup(*mem, (size_t)(ft_strchr(*mem, '\n') - *mem + 1));

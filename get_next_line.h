@@ -6,14 +6,14 @@
 /*   By: julrodri <julrodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 11:52:31 by julrodri          #+#    #+#             */
-/*   Updated: 2021/10/06 00:48:17 by julrodri         ###   ########.fr       */
+/*   Updated: 2021/10/07 17:56:39 by julrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-# define BUFFER_SIZE 5
+// # define BUFFER_SIZE 5
 
 # include <stddef.h>
 # include <stdlib.h>
